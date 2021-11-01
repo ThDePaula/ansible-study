@@ -1,0 +1,62 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+
+  vars: 
+    default_dir: /opt/custom
+    dict_dir: {
+      scripts: "{{ default_dir }}/scripts",
+      backup: "{{ default_dir }}/backup",
+      log: "{{ default_dir }}/log",
+      temp: "{{ default_dir }}/temp"
+    }
+
+  tasks:
+  - name: "INSTALANDO PACOTES | CENTOS"
+    yum:
+      update_cache: yes
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - "wget"
+    - "curl"
+    - "git"
+    when: (ansible_facts['distribution'] == "CentOS")
+
+  - name: "INSTALANDO PACOTES | DEBIAN"
+    apt:
+      update_cache: yes
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - "wget"
+    - "curl"
+    - "git"
+    when: (ansible_facts['distribution'] == "Debian")
+
+  - name: "DEFININDO HOSTNAME DOS SERVIDORES"
+    hostname: 
+      name: "{{ hostname }}"
+
+  - name: "CRIANDO DIRETÓRIO PADRÃO NOS SERVIDORES"
+    file:
+      path: "{{ item }}"
+      owner: ansible
+      group: ansible
+      state: directory
+    with_items:
+    - "{{ dict_dir.scripts }}"
+    - "{{ dict_dir.backup }}"
+    - "{{ dict_dir.log }}"
+    - "{{ dict_dir.temp }}"
+
+  - name: "CRIANDO ARQUIVO SIMPLES"
+    file: 
+      path: "{{ default_dir }}/script.py"
+      state: touch
+      owner: ansible
+      group: ansible
+      mode: 755
+      modification_time: preserve
+      access_time: preserve
