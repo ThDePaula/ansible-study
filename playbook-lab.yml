@@ -57,6 +57,14 @@
       state: touch
       owner: ansible
       group: ansible
-      mode: 755
+      mode: 0755
       modification_time: preserve
       access_time: preserve
+
+  - name: "EXEMPLO DE REGISTER"
+    shell: "date -u"
+    register: linux_date
+  
+  - name: "EXIBINDO REGISTER"
+    debug: 
+      msg: "{{ linux_date.stdout }}"
