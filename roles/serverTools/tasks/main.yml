@@ -1,0 +1,34 @@
+---
+# tasks file for serverTools
+- name: Set a hostaname
+  hostname: 
+    name: "{{ hostname }}"
+
+- name: 'Role serverTools | Softwares úteis para Administração do Servidor | Debian'
+  apt: 
+    update_cache: yes
+    cache_valid_time: 3600
+    name: 
+      - vim
+      - git
+      - ncdu
+      - gzip
+      - wget
+      - curl
+      - htop
+      - python3 
+    state: latest
+  when: (ansible_facts['os_family'] == "Debian")
+
+- name: 'Role serverTools | Softwares úteis para Administração do Servidor | CentOs'
+  yum: 
+    update_cache: yes
+    name: 
+      - vim
+      - git
+      - gzip
+      - wget
+      - curl
+      - python3 
+    state: latest
+  when: (ansible_facts['os_family'] == "RedHat")
