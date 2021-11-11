@@ -4,3 +4,4 @@
 
   roles:
     - serverTools
+    - mysql
