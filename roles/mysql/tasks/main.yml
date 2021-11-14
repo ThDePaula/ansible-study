@@ -25,7 +25,7 @@
 
 - name: Criando um Banco de Dados para ser utilizados pelo WordPress | Debian
   mysql_db:
-    login_unix_socket: "/var/run/mysqls.sock"
+    login_unix_socket: "/var/run/mysqld/mysqld.sock"
     name: "{{ db_wp_name }}"
     state: present
   when: (ansible_facts['os_family'] == "Debian")
