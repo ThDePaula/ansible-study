@@ -2,7 +2,7 @@
 192.168.0.21 hostname=vm-debian-01
 
 [centos]
-192.168.0.22 hostname=vm-centos-01
+192.168.0.22 hostname=vm-centos-02
 
 [all:vars]
 ansible_python_interpreter = /usr/bin/python3
