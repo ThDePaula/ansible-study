@@ -22,7 +22,7 @@
     name: mariadb 
     state: started 
     enabled: yes
-
+    
 - name: Criando um Banco de Dados para ser utilizado pelo WordPress | Debian
   mysql_db:
     login_unix_socket: "/var/run/mysqld/mysqld.sock"
