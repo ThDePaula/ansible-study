@@ -1,0 +1,7 @@
+---
+# vars file for apache
+site_folder: "/var/www/ansible_local"
+site_url: "www.ansible.local"
+site_domain: "ansible.local"
+log_prefix: "ansible-local"
+php_version: "7.3"

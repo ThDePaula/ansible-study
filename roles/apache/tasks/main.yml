@@ -1,0 +1,20 @@
+---
+# tasks file for apache
+- name: Inclui arquivo conf-redhat.yml
+  include: conf-redhat.yml
+  when: (ansible_facts['os_family'] == "RedHat")
+
+- name: Inclui arquivo conf-debian.yml
+  include: conf-debian.yml
+  when: (ansible_facts['os_family'] == "Debian")
+
+- name: "Criando diretório que irá hospedar os arquivos do site"
+  file:
+    path: "{{ site_folder }}"
+    state: directory
+    mode: '0755'
+
+- name: "Copiando arquivo index.html simples"
+  copy:
+    src: index.html
+    dest: "{{ site_folder }}"
